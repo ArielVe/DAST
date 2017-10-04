@@ -1,5 +1,4 @@
-﻿<!doctype html>
-<html>
+﻿<html>
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="estiloPI.css">
@@ -27,7 +26,9 @@
 			<img id="logo" src="LogoFoxtrot.jpg">
 		</div>
 	</div>
+</body>
+<footer>
 	<div id="cor3"></div>
 	<div id="cor4"></div>
-</body>
+</footer>
 </html>
