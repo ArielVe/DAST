@@ -4,4 +4,4 @@ Danilo Dantas,
 Sandra Costa,
 Tatiane Carlos.
 
-Foxtrot
+Kanino - Pet Shop
