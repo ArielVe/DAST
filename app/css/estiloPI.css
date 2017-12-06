@@ -7,23 +7,23 @@
 }
 
 body{
-	background-image: url(/imagem/fundo.jpg);
+	background-image: url(../imagem/fundo.jpg);
     width: 100%;
     height: 100%;
 }
 
 #cor1{
     width: 100%;
-    height: 31%;
+    height: 199px;
     border-style: solid;
-    border-color: #352419 ;
+    border-color: #352419;
     background-color: #352419;
     opacity: .9;
 }
 
 #cor2{
     width: 100%;
-    height: 5%;
+    height: 9%;
     border-style: solid;
     border-color: #352419;
     background-color: #352419;
@@ -62,9 +62,7 @@ h1{
     font-weight: 900;
     font-size: 70px;
     line-height: 48pt;
-    width: 100%;
-    padding-bottom: 40px;
-    padding-top: 30px;
+    width: 99%;
 	text-align: center;
     text-shadow: 2px 2px #8B5750;
     position: relative;
@@ -76,11 +74,12 @@ h2{
     font-weight: 900;
     font-size: 30px;
     line-height: 25pt;
-    width: 100%;
+    width: 99%;
     padding-bottom: 15px;
     padding-top: 20px;
     text-align: center;
     text-shadow: 1px 1px #8B5750;
+	position: absolute;
 }
 
 table{
@@ -126,7 +125,29 @@ td{
 
 }
 
-#login, #senha{
+#formulario{
+	width: 50%;
+	height: 85%;
+	background-color:#fff;
+	border-radius: 10px;
+	position:absolute;
+		margin-top:3%;
+		margin-left:23%;
+	padding:4% 0 0 0;	
+}
+
+#formulario2{
+	width: 50%;
+	height: 50%;
+	background-color:#fff;
+	border-radius: 10px;
+	position:absolute;
+		margin-top:5%;
+		margin-left:23%;
+	padding:5% 0 0 0;	
+}
+
+#login, #senha, #nome, #perfil, #desc, #preco, #imagem, #desconto, #estoque, #por, #categoria{
 	font-family: 'Black', cooper;
     color: #352419;
     font-size: 20px;
@@ -135,6 +156,17 @@ td{
     padding-bottom: 20px;
     padding-top: 15px;
     margin: 0% 5%;
+}
+
+#ativo{
+	font-family: 'Black', cooper;
+    color: #352419;
+    font-size: 20px;
+    line-height: 48pt;
+    width: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin: 3% 5%;
 }
 
 #login2, #senha2{
@@ -150,17 +182,48 @@ td{
 	margin: 0% 5% 10%;
 }
 
+#login3, #senha3, #nome3, #desc3, #preco3, #desconto3, #estoque3, #por3 {
+	width: 90%;
+	font-family: 'Black', cooper;
+	font-size: 18px;
+	line-height: 18pt;
+	color: #352419;
+	border: none;
+	border-bottom: 2px solid #FFEA00;
+	margin-left: 5%; 
+}
+
+#perfil3{
+	width: 90%;
+	font-family: 'Black', cooper;
+	font-size: 15px;
+	line-height: 15pt;
+	color: #352419;
+	border: none;
+	border-bottom: 2px solid #FFEA00;
+	margin-left: 5%; 
+}
+
+#ativo3{
+		
+}
+
 #button{
 	font-family: 'Black', cooper;
 	color: #FFEA00;
 	text-shadow: 1px 1px #8B5750;
 	background-color: #352419;
 	border-color: #352419;
-    font-size: 20px;
-    line-height: 20pt;
+    font-size: 25px;
+    line-height: 25pt;
 	width: 90%;
 	margin: 10% 5%;
 	border-radius: 20px;
+}
+
+#button:hover{
+	color: #352419;
+	background-color: #FFEA00;
 }
 
 #borda4{
@@ -202,40 +265,52 @@ td{
     	top: 100%;
 }
 
+#texto{
+	width:70%;
+	height:70%;
+	background-color:#fff;
+	border-radius:10px;
+	position: absolute;
+    	margin: 5% 15% 5%;
+	
+}
+
 p{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Black', cooper;
     font-weight: 400;
     font-size: 18px;
-    color: #008A8A;
-    width: 60%;
+    color: #352419;
+    width: 50%;
+	border-radius: 10px;
 	position: relative;
-    	margin: 5% 0 0 15%;
+    	margin: 5% 0 0 20%;
     vertical-align: middle;
     text-align: justify;
+	padding:5% 10% 0 5%;
 	
 }
 
 #bemvindo{
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Black', cooper;
     font-weight: 400;
-    font-size: 25px;
-	color: #008A8A;
+    font-size: 30px;
+	color: #352419;
     width: 62%;
+	text-shadow: 2px 2px #8B5750;
 	position: absolute;
-    	margin: 35% 35% 5%;
+    	margin: 2% 40% 5%;
     vertical-align: middle;
     text-align: justify;
 }
 
 #novo{
-    width: 13%;
-    height: 2.9%;
+    width: auto;
     background-color: #FFEA00;
     color: #352419;
     cursor: auto;
     float: right;
     display: block;
-    text-decoration:none;
+    text-decoration: none;
     text-align: center;
     font-family: 'black', cooper;
     font-size: 20px;
@@ -243,8 +318,8 @@ p{
     padding: 0.7%;
     cursor: auto;
     position: absolute;
-        top: 32%;
-        right: 3%;
+    top: 15%;
+    right: 3%;
 }
 
 #novo:hover{
@@ -261,6 +336,12 @@ p{
 }
 
 #cat{
+    background-color: #FFEA00;
+    color: #352419;
+    border-radius: 5px;
+}
+
+#prodt{
     background-color: #FFEA00;
     color: #352419;
     border-radius: 5px;
@@ -298,4 +379,81 @@ li a{
 	color: #FFEA00;
     font-size: 25px;
 	font-family: 'black', cooper;
+}
+
+#prod{
+	width: 5%;
+	height: 5%;
+}
+
+.card {
+    width: 79%;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background-clip: padding-box;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card span.card-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.card .card-image {
+    position: relative;
+    overflow: hidden;
+}
+.card .card-image img {
+    border-radius: 2px 2px 0 0;
+    background-clip: padding-box;
+    position: relative;
+    z-index: 0;
+}
+.card .card-image span.card-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+}
+.card .card-content {
+    padding: 16px;
+    border-radius: 0 0 2px 2px;
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+.card .card-content p {
+    margin: 0;
+    color: inherit;
+}
+.card .card-content span.card-title {
+    line-height: 48px;
+}
+.card .card-action {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 16px;
+}
+.card .card-action a {
+    color: #ffab40;
+    margin-right: 16px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+.card .card-action a:hover {
+    color: #ffd8a6;
+    text-decoration: none;
+}
+
+.card img {
+    width: auto;
+    height: 319px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.invisivel{
+    display:none;
 }

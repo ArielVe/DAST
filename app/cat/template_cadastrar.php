@@ -1,7 +1,7 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/estiloPI.css">
-	<title>Categoria</title>
+	<link rel="stylesheet" type="text/css" href="../css/estiloPI.css">
+	<title>Cadastrar</title>
 </head>
 	<body> 
 		<div id="cor1">
@@ -9,26 +9,27 @@
 			<h2>O lugar ideal para seu amiguinho!</h2>
 		</div>
 		<div id="img">
-			<a href="/menu" id="logo" src="/imagem/kaninologo.png"></a>
+			<a href="/menu"><img id="logo" src="../imagem/kaninologo.png"></a>
 		</div>
 		<div id="cor2">
 			<ul>
-				<li><a href="/menu">Voltar</a></li>
-				<li><a href="/user">Usuario</a></li> 
-				<li><a id="cat" href="/cat">Categoria</a></li>  
-				<li><a href="/product">Produto</a></li>  				
+				<li><a href="../menu">Voltar</a></li>
+				<li><a href="../user">Usuario</a></li> 
+				<li><a id="cat" href="../cat">Categoria</a></li>  
+				<li><a href="../product">Produto</a></li>  				
 				<li><a href="/?logout=1">Sair</a></li> 
 			</ul>
 		</div>
 		<div id="fundo">
 			<div id="cor4"></div>
 		</div>
-		<div id="formulario">
+		<div id="formulario2">
 			<form method="post">
-			
-				Nome/Categoria: <input type="text" name="nomeCategoria"><br><br>
-				Descrição: <input type="textarea" name="descCategoria"><br><br>
-				<input type="submit" value="Gravar" name="btnGravar">
+				<label for="text" id="nome">Nome/Categoria</label>
+				<input type="text" id="nome3" name="nomeCategoria">
+                <label for="text" id="desc">Descrição</label>
+				<input type="textarea" id="desc3" name="descCategoria">
+				<input type="submit" value="Gravar" id="button" name="btnGravar">
 			
 			</form>
 		</div>

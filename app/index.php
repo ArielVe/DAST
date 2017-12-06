@@ -8,6 +8,7 @@ if(isset($_GET['logout'])){
 $login = isset($_POST['login']) ? $_POST['login'] : null;
 $senha = isset($_POST['senha']) ? $_POST['senha'] : null;
 
+
 if(!empty($login) && !empty($senha)){
 	include('db/bancodedados.php');
 
@@ -16,8 +17,9 @@ if(!empty($login) && !empty($senha)){
 								FROM Usuario
 								WHERE loginUsuario = ?
 								AND senhaUsuario = ?');
-	odbc_execute($stmt, array($login, $senha));
+	$rs = odbc_execute($stmt, array($login, $senha));
 
+	
 	$usuario = odbc_fetch_array($stmt);
 
 	if(!$usuario['idUsuario']){
@@ -36,10 +38,4 @@ if(!empty($login) && !empty($senha)){
 }
 
 include('template.php');
-
-
-
-
-
-
 ?>

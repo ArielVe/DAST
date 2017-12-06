@@ -8,10 +8,10 @@ if(isset($_POST['btnGravar'])){
 	if(	!empty($_POST['loginUsuario']) &&
 		!empty($_POST['nomeUsuario']) &&
 		!empty($_POST['senhaUsuario'])){
-		
-		$_POST['usuarioAtivo'] = 
+
+		$_POST['usuarioAtivo'] =
 			isset($_POST['usuarioAtivo']) ? true : false;
-		
+
 		$stmt = odbc_prepare($db, "	INSERT INTO Usuario
 									(loginUsuario,
 									nomeUsuario,
@@ -25,16 +25,16 @@ if(isset($_POST['btnGravar'])){
 										$_POST['senhaUsuario'],
 										$_POST['tipoPerfil'],
 										$_POST['usuarioAtivo']))){
-			$msg = 'Usuário gravado com sucesso!';			
+			$msg = 'Usuário gravado com sucesso!';
 		}else{
 			$erro = 'Erro ao gravar o usuário';
-		}								
-							
+		}
+
 	}else{
-		
+
 		$erro = 'Os campos: Login, Nome e Senha 
 					s&atilde;o obrigat&oacute;rios';
-		
+
 	}
 }
 //FIM Funcionalidade Gravar Cadastro
@@ -45,10 +45,10 @@ if(isset($_POST['btnAtualizar'])){
 	if(	!empty($_POST['loginUsuario']) &&
 		!empty($_POST['nomeUsuario']) &&
 		!empty($_POST['senhaUsuario'])){
-		
-		$_POST['usuarioAtivo'] = 
+
+		$_POST['usuarioAtivo'] =
 			isset($_POST['usuarioAtivo']) ? true : false;
-		
+
 		$stmt = odbc_prepare($db, "	UPDATE 
 										Usuario
 									SET 
@@ -59,23 +59,23 @@ if(isset($_POST['btnAtualizar'])){
 										usuarioAtivo = ?
 									WHERE
 										idUsuario = ?");
-									
+
 		if(odbc_execute($stmt, array(	$_POST['loginUsuario'],
 										$_POST['nomeUsuario'],
 										$_POST['senhaUsuario'],
 										$_POST['tipoPerfil'],
 										$_POST['usuarioAtivo'],
 										$_POST['idUsuario']))){
-			$msg = 'Usu&aacute;rio atualizado com sucesso!';			
+			$msg = 'Usu&aacute;rio atualizado com sucesso!';
 		}else{
 			$erro = 'Erro ao atualizar o usu&aacute;rio';
-		}								
-							
+		}
+
 	}else{
-		
+
 		$erro = 'Os campos: Login, Nome e Senha 
 					s&atilde;o obrigat&oacute;rios';
-		
+
 	}
 }
 //FIM Funcionalidade Editar Cadastro
@@ -83,16 +83,16 @@ if(isset($_POST['btnAtualizar'])){
 //Funcionalidade Excluir
 if(isset($_GET['excluir'])){
 	if(is_numeric($_GET['excluir'])){
-		
+
 		if(odbc_exec($db, "	DELETE FROM 
 								Usuario 
 							WHERE
 								idUsuario = {$_GET['excluir']}")){
-			$msg = 'Usu&aacute;rio removido com sucesso';						
+			$msg = 'Usu&aacute;rio removido com sucesso';
 		}else{
 			$erro = 'Erro ao excluir o usu&aacute;rio';
 		}
-		
+
 	}else{
 		$erro = 'C&oacute;digo inv&aacute;lido';
 	}
@@ -106,16 +106,16 @@ $q = odbc_exec($db, '	SELECT 	idUsuario, loginUsuario,
 								Usuario');
 
 while($r = odbc_fetch_array($q)){
-	
+
 	$usuarios[$r['idUsuario']] = $r;
-	
+
 }
 //FIM Funcionalidade Listar
 
 if(isset($_GET['cadastrar'])){//FORM Cadastrar
 
 	include('template_cadastrar.php');
-	
+
 }elseif(isset($_GET['editar'])){//FORM Editar
 
 	if(is_numeric($_GET['editar'])){
@@ -130,10 +130,10 @@ if(isset($_GET['cadastrar'])){//FORM Cadastrar
 	}
 
 	include('template_editar.php');
-	
+
 }else{//FORM Listar
 
 	include('template.php');
-	
+
 }
 ?>

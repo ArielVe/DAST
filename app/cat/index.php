@@ -42,7 +42,8 @@ if(isset($_POST['btnAtualizar'])){
 										idCategoria = ?");
 									
 		if(odbc_execute($stmt, array(	$_POST['nomeCategoria'],
-										$_POST['descCategoria']))){
+										$_POST['descCategoria'],
+										$_POST['idCategoria']))){
 			$msg = 'Categoria atualizada com sucesso!';			
 		}else{
 			$erro = 'Erro ao atualizar Categoria';

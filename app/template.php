@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="/css/estiloPI.css">
+<link rel="stylesheet" type="text/css" href="css/estiloPI.css">
 <title>Login</title>
 </head>
 <body>
@@ -10,14 +10,14 @@
 		<h2>O lugar ideal para seu amiguinho!</h2>
 	</div>
 	<div id="img">
-		<a href="template.php"><img id="logo" src="/imagem/kaninologo.png"></a>
+		<a href="template.php"><img id="logo" src="imagem/kaninologo.png"></a>
 	</div>
 	<div id="cor2"></div>
 	<div id="fundo">
 		<div id="cor3"></div>
 		<div id="cor4"></div>
-		<img id="pet" src="/imagem/pets.png">
-		<img id="gato" src="/imagem/gat.png">
+		<img id="pet" src="imagem/pets.png">
+		<img id="gato" src="imagem/gat.png">
 	</div> 
 	<h1>Login</h1>
 	<div id="boxlogin">
