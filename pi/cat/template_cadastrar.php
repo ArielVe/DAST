@@ -17,7 +17,7 @@
 				<li><a href="../user">Usuario</a></li> 
 				<li><a id="cat" href="../cat">Categoria</a></li>  
 				<li><a href="../product">Produto</a></li>  				
-				<li><a href="/?logout=1">Sair</a></li> 
+				<li><a href="../?logout=1">Sair</a></li> 
 			</ul>
 		</div>
 		<div id="fundo">

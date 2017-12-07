@@ -12,8 +12,8 @@ if(isset($_POST['btnGravar'])){
 									descCategoria)
 									VALUES
 									(?,?)");
-		if(odbc_execute($stmt, array(	$_POST['nomeCategoria'],
-										$_POST['descCategoria']))){
+		if(odbc_execute($stmt, array(	utf8_decode($_POST['nomeCategoria']),
+										utf8_decode($_POST['descCategoria'])))){
 			$msg = 'Categoria gravada com sucesso!';
 		}else{
 			$erro = 'Erro ao gravar Categoria';
@@ -41,8 +41,8 @@ if(isset($_POST['btnAtualizar'])){
 									WHERE
 										idCategoria = ?");
 									
-		if(odbc_execute($stmt, array(	$_POST['nomeCategoria'],
-										$_POST['descCategoria'],
+		if(odbc_execute($stmt, array(	utf8_decode($_POST['nomeCategoria']),
+										utf8_decode($_POST['descCategoria']),
 										$_POST['idCategoria']))){
 			$msg = 'Categoria atualizada com sucesso!';			
 		}else{
@@ -80,7 +80,8 @@ if(isset($_GET['excluir'])){
 $q = odbc_exec($db, '	SELECT 	idCategoria, nomeCategoria,
 								descCategoria
 						FROM 
-								Categoria');
+								Categoria
+						ORDER BY idCategoria DESC');
 
 while($r = odbc_fetch_array($q)){
 	

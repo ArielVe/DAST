@@ -1,31 +1,26 @@
 <?php
 session_start();
-include('../db/bancodedadosSQLServer.php');
+include('../db/bancodedados.php');
 
 $id = $_POST['id'];
-$nome = $_POST['nome'];
-$deletar = "<script>document.write(deletar);</script>";
 
 try {
-    if ($deletar == true) {
-        unset($deletar);
-        $instrucaoSQL = "DELETE FROM Produto WHERE idProduto = ?";
-        $params = array( $id );
-        $consulta = sqlsrv_query($conn, $instrucaoSQL, $params);
-        $rows_affected = sqlsrv_rows_affected($consulta);
 
-        if($rows_affected > 0){
-            $_SESSION['msg'] = 'Produto deletado com sucesso';
-			header('Location: index.php');
-            
-        }else{
-            $_SESSION['erro'] = 'Erro ao deletar o produto';
-			header('Location: index.php');
-        }
+    unset($deletar);
+    $instrucaoSQL = "DELETE FROM Produto WHERE idProduto = ?";
+    $params = array( $id );
+    $consulta = odbc_prepare($db, $instrucaoSQL);
+    $product = odbc_execute($consulta, $params);
+    $rows_affected = odbc_num_rows($consulta);
 
-    }else{
+    if($rows_affected > 0){
+        $_SESSION['msg'] = 'Produto deletado com sucesso';
 		header('Location: index.php');
-	}
+        
+    }else{
+        $_SESSION['erro'] = 'Erro ao deletar o produto';
+		header('Location: index.php');
+    }
 
 } catch (Exception $e) {
     die($e);

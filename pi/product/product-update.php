@@ -12,10 +12,11 @@ $idUsuario = $_SESSION['idUsuario'];
 $qtdMinEstoque = $_POST['qtdMinEstoque'];
 $ativoProduto = $_POST['ativoProduto'];
 
-
+/*var_dump($_FILES['imagem']['size']>0);
+    exit();*/
 //Cadastrar Nova Categoria
 try {
-    if (isset($_FILES['imagem'])) {
+    if ($_FILES['imagem']['size']>0) {
 
 
         $foto = $_FILES['imagem'];
@@ -29,7 +30,7 @@ try {
 
         if(!preg_match('/^image\/(pjpeg|jpeg|png|gif|bmp)$/', $tipo)) {
             $_SESSION['erro'] = 'Imagem com o formato inválido';
-            header('Location: /management-page-structure/product-management.php');
+            //header('Location: /management-page-structure/product-management.php');
         }
 
         $instrucaoSQL = "UPDATE Produto SET nomeProduto = ?, descontoPromocao = ?,precProduto = ?,descProduto = ?,idCategoria = ?,idUsuario = ?,ativoProduto = ?,qtdMinEstoque = ?, imagem = ? WHERE idProduto = ?";
@@ -46,9 +47,14 @@ try {
         $product = odbc_execute($consulta, $params);
 
         $rows_affected = odbc_num_rows($consulta);
+        $odbc_error = str_replace('[Microsoft][ODBC SQL Server Driver][SQL Server]', '', odbc_errormsg($db));
 
         if($rows_affected > 0){
-            $_SESSION['msg'] = 'Produto adicionado com sucesso';
+            if($odbc_error) {
+                $_SESSION['erro'] = $odbc_error;
+            } else {
+                $_SESSION['msg'] = 'Produto editado com sucesso';
+            }
             header('Location: index.php');
         }else{
             $_SESSION['erro'] = 'Erro ao adicionar o produto';

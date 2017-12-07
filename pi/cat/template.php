@@ -19,7 +19,7 @@
 				<li><a href="../user">Usuario</a></li> 
 				<li><a id="cat" href="../cat">Categoria</a></li>  
 				<li><a href="../product">Produto</a></li>  				
-				<li><a href="/?logout=1">Sair</a></li>
+				<li><a href="../?logout=1">Sair</a></li>
                 <li>
                     <div class="input-group input-group-lg">
                         <input id="filtro" type="text" class="form-control" placeholder="Digite um produto" aria-label="Username" aria-describedby="sizing-addon1" style="width: auto;">
@@ -57,7 +57,7 @@
 					echo "	<tr class=\"box-info\">
 								<td>$idCategoria</td>
 								<td class=\"box-info--text\">".utf8_encode($dadosCategoria['nomeCategoria'])."</td>
-								<td>{$dadosCategoria['descCategoria']}</td>
+								<td>".utf8_encode($dadosCategoria['descCategoria'])."</td>
 								<td><a href='?editar=$idCategoria'>E</a></td>
 								<td><a href='?excluir=$idCategoria'>X</a></td>
 							</tr>";

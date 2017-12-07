@@ -1,3 +1,8 @@
+<?php
+include('../db/bancodedados.php');
+include('../auth/controle.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +26,7 @@
         <li><a href="../user">Usuario</a></li>
         <li><a href="../cat">Categoria</a></li>
         <li><a id="prodt" href="../product">Produto</a></li>
-        <li><a href="/?logout=1">Sair</a></li>
+        <li><a href="../?logout=1">Sair</a></li>
         <li>
             <div class="input-group input-group-lg">
                 <input id="filtro" type="text" class="form-control" placeholder="Digite um produto" aria-label="Username" aria-describedby="sizing-addon1" style="width: auto;">
@@ -30,11 +35,10 @@
     </ul>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
-        <?php include('../db/bancodedados.php');
-        session_start();
+        <?php
         $msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : false;
         $erro = isset($_SESSION['erro']) ? $_SESSION['erro'] : false;
 
@@ -65,7 +69,7 @@
             unset($erro);
         }
         try {
-            $consulta = odbc_exec($db, "SELECT idProduto, nomeProduto, descontoPromocao, precProduto, descProduto, idCategoria, idUsuario, ativoProduto, qtdMinEstoque, imagem FROM  Produto");
+            $consulta = odbc_exec($db, "SELECT idProduto, nomeProduto, descontoPromocao, precProduto, descProduto, idCategoria, idUsuario, ativoProduto, qtdMinEstoque, imagem FROM  Produto ORDER BY idProduto DESC");
             $numRegistros = odbc_num_rows($consulta);
 
         } catch (Exception $e) {
@@ -84,7 +88,7 @@
             $produtos['ativoProduto'] = ($produtos['ativoProduto'] == 1) ? "Sim" : "Não";
             $image64 = $produtos['imagem'];
             $image64 = base64_encode($image64);
-            $image64 = "<img src=\"data:image/jpeg;base64," . $image64 . "\">";
+            $image64 = "<img height=\"300\" width=\"auto\" src=\"data:image/jpeg;base64," . $image64 . "\">";
             $i++;
             ?>
 
@@ -144,7 +148,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST">
+                                    <form method="POST" enctype="multipart/form-data">
                                         <div class="modal-body">
                                             <input type="hidden" class="form-control" id="recipient-name" value="<?php echo $produtos['idProduto']; ?>" name="idProduto" placeholder='EX: Produto Exemplo'>
 
@@ -180,7 +184,8 @@
                                                     }
                                                     foreach ($categorias as $idCategoria => $dadosCategoria) {
                                                         $utf_nomeCategoria = $dadosCategoria['nomeCategoria'];
-                                                        echo "<option value='$idCategoria'>$utf_nomeCategoria</option>";
+                                                        $catSelecionada = $produtos['idCategoria']==$idCategoria ? 'selected' : '';
+                                                        echo "<option value='$idCategoria' $catSelecionada>$utf_nomeCategoria</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -238,26 +243,32 @@
                 </div>
                 <div class="modal-body">
                     <form method="POST" enctype="multipart/form-data">
+                        <?php
+                        $userSession = $_SESSION['idUsuario'];
+                        $user = odbc_exec($db, "SELECT idUsuario FROM Usuario WHERE idUsuario = $userSession");
+                        $userId = odbc_fetch_array($user)['idUsuario'];
 
+                        ?>
+                        <input type="hidden" value="<?php echo $userId;?>" name="idUsuario">
 
                         <div class="form-group">
-                            <label for="recipient-name" class="form-control-label">Nome:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="nomeProduto" placeholder='EX: Produto Exemplo'>
+                            <label for="recipient-name" class="form-control-label">Nome: </label>
+                            <input type="text" class="form-control" id="recipient-name" name="nomeProduto" placeholder='EX: Produto Exemplo' value="BLALALA">
                         </div>
 
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Desconto Promoção:</label>
-                            <input type="number" step="any" class="form-control" id="recipient-name" name="descontoPromocao" placeholder='EX: 1.00'>
+                            <input type="number" step="any" class="form-control" id="recipient-name" name="descontoPromocao" placeholder='EX: 1.00' value="1">
                         </div>
 
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Preço:</label>
-                            <input type="number" step="any" class="form-control" id="recipient-name" name="precProduto" placeholder='EX: 1.00'>
+                            <input type="number" step="any" class="form-control" id="recipient-name" name="precProduto" placeholder='EX: 1.00' value="21">
                         </div>
 
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Descrição:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="descProduto" placeholder='EX: Descrição para o produto'>
+                            <input type="text" class="form-control" id="recipient-name" name="descProduto" placeholder='EX: Descrição para o produto' value="BLALALA">
                         </div>
 
                         <div class="form-group">
@@ -279,13 +290,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Usuário:</label>
-                            <input type="text" class="form-control" id="recipient-name" value="1" name="idUsuario">
-                        </div>
-
-                        <div class="form-group">
                             <label for="message-text" class="form-control-label">Estoque:</label>
-                            <input type="number" class="form-control" id="recipient-name" name="qtdMinEstoque" placeholder='EX: 4'>
+                            <input type="number" class="form-control" id="recipient-name" name="qtdMinEstoque" placeholder='EX: 4' value="1">
                         </div>
 
                         <div class="input-group input-file" name="Fichier1">

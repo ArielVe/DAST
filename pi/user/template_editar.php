@@ -17,7 +17,7 @@
 				<li><a id="user" href="../user">Usuario</a></li> 
 				<li><a href="../cat">Categoria</a></li>  
 				<li><a href="../product">Produto</a></li>  				
-				<li><a href="/?logout=1">Sair</a></li> 
+				<li><a href="../?logout=1">Sair</a></li> 
 			</ul>
 		</div>
 		<div id="fundo">
@@ -26,13 +26,11 @@
 		<div id="formulario">
 			<form method="post">
 				<label for="text" id="login" name="login">Login</label>
-				<input type="text" id="login3" name="loginUsuario"
-						value="<?php echo $dados_usuario['loginUsuario']; ?>">
+				<input type="text" id="login3" name="loginUsuario" value="<?php echo utf8_encode($dados_usuario['loginUsuario']); ?>">
                 <label for="text" id="senha" name="senha">Senha</label>
 				<input type="password" id="senha3" name="senhaUsuario">
                 <label for="text" id="nome" name="nome">Nome</label>
-				<input type="text" id="nome3" name="nomeUsuario"
-						value="<?php echo $dados_usuario['nomeUsuario']; ?>">
+				<input type="text" id="nome3" name="nomeUsuario" value="<?php echo utf8_encode($dados_usuario['nomeUsuario']); ?>">
                 <label for="text" id="perfil" name="perfil">Perfil</label>
 					<select id="perfil3" name="tipoPerfil">
 						<option value="">Escolha</option>

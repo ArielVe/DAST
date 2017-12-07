@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../db/bancodedadosSQLServer.php');
+include('../db/bancodedados.php');
 
 $nomeProduto = $_POST['nomeProduto'];
 $descontoPromocao = $_POST['descontoPromocao'];
@@ -29,18 +29,24 @@ try {
                 header('Location: index.php');
             }
 			
-			$instrucaoSQL = "INSERT INTO Produto (nomeProduto, descontoPromo,precProduto,descProduto,idCategoria,idUsuario,ativoProduto,qtdMinEstoque,imagem) VALUES (?,?,?,?,?,?,?,?,?)";
+			$instrucaoSQL = "INSERT INTO Produto (nomeProduto, descontoPromocao, precProduto, descProduto, idCategoria, idUsuario, ativoProduto, qtdMinEstoque, imagem) VALUES (?,?,?,?,?,?,?,?,?)";
 
             $nomeProduto = utf8_decode($nomeProduto);
             $descProduto = utf8_decode($descProduto);
+            /*print_r($descontoPromocao);
+            exit();*/
             $precProduto = number_format($precProduto,2, '.', '');
-            $descProduto = number_format($descProduto,2, '.', '');
+            $descontoPromocao = number_format($descontoPromocao,2, '.', '');
             $ativoProduto = isset($ativo) ? true : false;
 
 			$params = array($nomeProduto, $descontoPromocao, $precProduto, $descProduto, $idCategoria, $idUsuario, $ativoProduto, $qtdMinEstoque,$fileParaDB);
-			$consulta = sqlsrv_query($conn, $instrucaoSQL, $params);
+			$consulta = odbc_prepare($db, $instrucaoSQL);
+            odbc_execute($consulta, $params);
 
-       	    $rows_affected = sqlsrv_rows_affected($consulta);
+            print_r($consulta);
+            /*exit();*/
+
+       	    $rows_affected = odbc_num_rows($consulta);
 
             if($rows_affected > 0){
                 $_SESSION['msg'] = 'Produto adicionado com sucesso';

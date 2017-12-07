@@ -9,10 +9,9 @@ if(isset($_POST['btnGravar'])){
 		!empty($_POST['nomeUsuario']) &&
 		!empty($_POST['senhaUsuario'])){
 
-		$_POST['usuarioAtivo'] =
-			isset($_POST['usuarioAtivo']) ? true : false;
+		$_POST['usuarioAtivo'] = isset($_POST['usuarioAtivo']) ? true : false;
 
-		$stmt = odbc_prepare($db, "	INSERT INTO Usuario
+		$stmt = odbc_prepare($db, "INSERT INTO Usuario
 									(loginUsuario,
 									nomeUsuario,
 									senhaUsuario,
@@ -20,8 +19,8 @@ if(isset($_POST['btnGravar'])){
 									usuarioAtivo)
 									VALUES
 									(?,?,?,?,?)");
-		if(odbc_execute($stmt, array(	$_POST['loginUsuario'],
-										$_POST['nomeUsuario'],
+		if(odbc_execute($stmt, array(	utf8_decode($_POST['loginUsuario']),
+										utf8_decode($_POST['nomeUsuario']),
 										$_POST['senhaUsuario'],
 										$_POST['tipoPerfil'],
 										$_POST['usuarioAtivo']))){
@@ -32,8 +31,7 @@ if(isset($_POST['btnGravar'])){
 
 	}else{
 
-		$erro = 'Os campos: Login, Nome e Senha 
-					s&atilde;o obrigat&oacute;rios';
+		$erro = 'Os campos: Login, Nome e Senha s&atilde;o obrigat&oacute;rios';
 
 	}
 }
@@ -43,29 +41,42 @@ if(isset($_POST['btnGravar'])){
 if(isset($_POST['btnAtualizar'])){
 	unset($_GET['editar']);
 	if(	!empty($_POST['loginUsuario']) &&
-		!empty($_POST['nomeUsuario']) &&
-		!empty($_POST['senhaUsuario'])){
+		!empty($_POST['nomeUsuario'])){
 
 		$_POST['usuarioAtivo'] =
 			isset($_POST['usuarioAtivo']) ? true : false;
 
-		$stmt = odbc_prepare($db, "	UPDATE 
+		$odbcUser = odbc_prepare($db, "	UPDATE 
 										Usuario
 									SET 
 										loginUsuario = ?,
 										nomeUsuario = ?,
-										senhaUsuario = ?,
 										tipoPerfil = ?,
 										usuarioAtivo = ?
 									WHERE
 										idUsuario = ?");
+		$userUpdate = odbc_execute($odbcUser, array(
+			utf8_decode($_POST['loginUsuario']),
+			utf8_decode($_POST['nomeUsuario']),
+			$_POST['tipoPerfil'],
+			$_POST['usuarioAtivo'],
+			$_POST['idUsuario'])
+		);
+		if(	!empty($_POST['senhaUsuario']) ){
+			$odbcSenha = odbc_prepare($db, "	UPDATE 
+											Usuario
+										SET 
+											senhaUsuario = ?
+										WHERE
+											idUsuario = ?");
 
-		if(odbc_execute($stmt, array(	$_POST['loginUsuario'],
-										$_POST['nomeUsuario'],
-										$_POST['senhaUsuario'],
-										$_POST['tipoPerfil'],
-										$_POST['usuarioAtivo'],
-										$_POST['idUsuario']))){
+			$userSenha = odbc_execute($odbcSenha, array(
+				$_POST['senhaUsuario'],
+				$_POST['idUsuario'])
+			);
+		}
+
+		if($userUpdate){
 			$msg = 'Usu&aacute;rio atualizado com sucesso!';
 		}else{
 			$erro = 'Erro ao atualizar o usu&aacute;rio';
@@ -73,8 +84,7 @@ if(isset($_POST['btnAtualizar'])){
 
 	}else{
 
-		$erro = 'Os campos: Login, Nome e Senha 
-					s&atilde;o obrigat&oacute;rios';
+		$erro = 'Os campos: Login, Nome e Senha s&atilde;o obrigat&oacute;rios';
 
 	}
 }
@@ -103,7 +113,8 @@ $q = odbc_exec($db, '	SELECT 	idUsuario, loginUsuario,
 								nomeUsuario, tipoPerfil, 
 								usuarioAtivo
 						FROM 
-								Usuario');
+								Usuario
+						ORDER BY idUsuario DESC');
 
 while($r = odbc_fetch_array($q)){
 
